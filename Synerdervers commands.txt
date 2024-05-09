@@ -1,0 +1,1200 @@
+Router>erase start
+Router>erase startup
+Router>erase startup-
+Router>en
+Router#erase
+Router#erase sta
+Router#erase startup-config 
+Erasing the nvram filesystem will remove all configuration files! Continue? [confirm]
+[OK]
+Erase of nvram: complete
+%SYS-7-NV_BLOCK_INIT: Initialized the geometry of nvram
+Router#reload
+Proceed with reload? [confirm]
+System Bootstrap, Version 12.1(3r)T2, RELEASE SOFTWARE (fc1)
+Copyright (c) 2000 by cisco Systems, Inc.
+Initializing memory for ECC
+..
+PT1000 processor with 524288 Kbytes of main memory
+Main memory is configured to 64 bit mode with ECC enabled
+
+Readonly ROMMON initialized
+
+Self decompressing the image :
+########################################################################## [OK]
+
+              Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco Internetwork Operating System Software
+IOS (tm) PT1000 Software (PT1000-I-M), Version 12.2(28), RELEASE SOFTWARE (fc5)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2005 by cisco Systems, Inc.
+Compiled Wed 27-Apr-04 19:01 by miwang
+
+PT 1001 (PTSC2005) processor (revision 0x200) with 60416K/5120K bytes of memory
+.
+Processor board ID PT0123 (0123)
+PT2005 processor: part number 0, mask 01
+Bridging software.
+X.25 software, Version 3.0.0.
+4 FastEthernet/IEEE 802.3 interface(s)
+3 Low-speed serial(sync/async) network interface(s)
+32K bytes of non-volatile configuration memory.
+63488K bytes of ATA CompactFlash (Read/Write)
+
+
+         --- System Configuration Dialog ---
+
+Would you like to enter the initial configuration dialog? [yes/no]: no
+
+
+Press RETURN to get started!
+
+
+
+Router>en
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R1
+R1(config)#no ip domain-lookup
+R1(config)#enable secret class
+R1(config)#banner motd &
+Enter TEXT message.  End with the character '&'.
+***********************************
+  !!!AUTHORIZED ACCESS ONLY!!!
+***********************************
+&
+
+R1(config)#line console 0
+R1(config-line)#password cisco
+R1(config-line)#login
+R1(config-line)#exit
+R1(config)#line vty 0 4
+R1(config-line)#password cisco
+R1(config-line)#login
+R1(config-line)#exit
+R1(config)#
+
+
+
+Router>en
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R5
+R5(config)#no ip domain-lookup
+R5(config)#enable secret class
+R5(config)#banner motd &
+Enter TEXT message.  End with the character '&'.
+******************************
+  !!!AUTHORIZED ACCESS ONLY!!!
+********************************
+&
+
+R5(config)#line console 0
+R5(config-line)#password cisco
+R5(config-line)#login
+R5(config-line)#exit
+R5(config)#line vty 0 4
+R5(config-line)#password cisco
+R5(config-line)#login
+R5(config-line)#exit
+R5(config)#int fa0/0
+R5(config-if)#ip address 64.96.56.1 255.255.254.0
+R5(config-if)#no shutdown
+
+R5(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R5(config-if)#int se3/0
+R5(config-if)#ip address 64.96.60.18 255.255.255.252
+R5(config-if)#clock rate 64000
+R5(config-if)#no shutdown
+
+R5(config-if)#
+%LINK-5-CHANGED: Interface Serial3/0, changed state to up
+
+R5(config-if)#end
+R5#
+%SYS-5-CONFIG_I: Configured from console by console
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial3/0, changed state to up
+
+R5#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R5#
+
+
+
+Router>en
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R6
+R6(config)#no ip domain-lookup 
+R6(config)#enable secret class
+R6(config)#banner motd &
+Enter TEXT message.  End with the character '&'.
+*************************************
+  !!!AUTHORIZED ACCESS ONLY!!!
+*************************************
+&
+
+R6(config)#line console 0
+R6(config-line)#password cisco
+R6(config-line)#login
+R6(config-line)#exit
+R6(config)#line vty 0 4
+R6(config-line)#password cisco
+R6(config-line)#login
+R6(config-line)#exit
+R6(config)#int fa0/0 64.96.52.1 255.255.252.0
+                     ^
+% Invalid input detected at '^' marker.
+	
+R6(config)#int fa0/0
+R6(config-if)#ip address 64.96.58.1 255.255.254.0
+R6(config-if)#no shutdown
+
+R6(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R6(config-if)#int se2/0
+R6(config-if)#ip address 64.96.60.1 255.255.255.252
+R6(config-if)#no shutdown
+
+R6(config-if)#
+%LINK-5-CHANGED: Interface Serial2/0, changed state to up
+
+R6(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial2/0, changed state to up
+
+R6(config-if)#end
+R6#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R6#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R6#
+
+
+Router>en
+Router#erase
+Router#erase 
+Router#erase startup-config 
+Erasing the nvram filesystem will remove all configuration files! Continue? [confirm]
+[OK]
+Erase of nvram: complete
+%SYS-7-NV_BLOCK_INIT: Initialized the geometry of nvram
+Router#reload
+Proceed with reload? [confirm]
+System Bootstrap, Version 12.1(3r)T2, RELEASE SOFTWARE (fc1)
+Copyright (c) 2000 by cisco Systems, Inc.
+Initializing memory for ECC
+..
+PT1000 processor with 524288 Kbytes of main memory
+Main memory is configured to 64 bit mode with ECC enabled
+
+Readonly ROMMON initialized
+
+Self decompressing the image :
+########################################################################## [OK]
+
+              Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco Internetwork Operating System Software
+IOS (tm) PT1000 Software (PT1000-I-M), Version 12.2(28), RELEASE SOFTWARE (fc5)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2005 by cisco Systems, Inc.
+Compiled Wed 27-Apr-04 19:01 by miwang
+
+PT 1001 (PTSC2005) processor (revision 0x200) with 60416K/5120K bytes of memory
+.
+Processor board ID PT0123 (0123)
+PT2005 processor: part number 0, mask 01
+Bridging software.
+X.25 software, Version 3.0.0.
+4 FastEthernet/IEEE 802.3 interface(s)
+3 Low-speed serial(sync/async) network interface(s)
+32K bytes of non-volatile configuration memory.
+63488K bytes of ATA CompactFlash (Read/Write)
+
+
+         --- System Configuration Dialog ---
+
+Would you like to enter the initial configuration dialog? [yes/no]: no
+
+
+Press RETURN to get started!
+
+
+
+Router>
+
+
+
+
+
+
+
+
+Router con0 is now available
+
+
+
+
+
+
+Press RETURN to get started.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R4
+R4(config)#no ip domain-lookup
+R4(config)#enable secret class
+R4(config)#banner motd &
+Enter TEXT message.  End with the character '&'.
+****************************************
+    !!!AUTHORIZED ACCESS ONLY!!!
+****************************************
+&
+
+R4(config)#line console 0
+R4(config-line)#password cisco
+R4(config-line)#login
+R4(config-line)#exit
+R4(config)#line vty 0 4
+R4(config-line)#password cisco
+R4(config-line)#login
+R4(config-line)#exit
+R4(config)#int fa0/0
+R4(config-if)#ip address 64.96.52.1 255.255.252.0
+R4(config-if)#no shutdown
+
+R4(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R4(config-if)#int se2/0
+R4(config-if)#ip address 64.96.60.5 255.255.255.252
+R4(config-if)#no shutdown
+
+R4(config-if)#
+%LINK-5-CHANGED: Interface Serial2/0, changed state to up
+
+R4(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial2/0, changed state to up
+
+R4(config-if)#end
+R4#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R4#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R4#
+
+
+
+
+Router>en
+Router#erase 
+Router#erase startup-config 
+Erasing the nvram filesystem will remove all configuration files! Continue? [confirm]
+[OK]
+Erase of nvram: complete
+%SYS-7-NV_BLOCK_INIT: Initialized the geometry of nvram
+Router#reload
+Proceed with reload? [confirm]
+System Bootstrap, Version 12.1(3r)T2, RELEASE SOFTWARE (fc1)
+Copyright (c) 2000 by cisco Systems, Inc.
+Initializing memory for ECC
+..
+PT1000 processor with 524288 Kbytes of main memory
+Main memory is configured to 64 bit mode with ECC enabled
+
+Readonly ROMMON initialized
+
+Self decompressing the image :
+########################################################################## [OK]
+
+              Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco Internetwork Operating System Software
+IOS (tm) PT1000 Software (PT1000-I-M), Version 12.2(28), RELEASE SOFTWARE (fc5)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2005 by cisco Systems, Inc.
+Compiled Wed 27-Apr-04 19:01 by miwang
+
+PT 1001 (PTSC2005) processor (revision 0x200) with 60416K/5120K bytes of memory
+.
+Processor board ID PT0123 (0123)
+PT2005 processor: part number 0, mask 01
+Bridging software.
+X.25 software, Version 3.0.0.
+4 FastEthernet/IEEE 802.3 interface(s)
+2 Low-speed serial(sync/async) network interface(s)
+32K bytes of non-volatile configuration memory.
+63488K bytes of ATA CompactFlash (Read/Write)
+
+
+         --- System Configuration Dialog ---
+
+Would you like to enter the initial configuration dialog? [yes/no]: no
+
+
+Press RETURN to get started!
+
+
+
+Router>
+
+
+
+
+
+
+
+
+Router con0 is now available
+
+
+
+
+
+
+Press RETURN to get started.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R2
+R2(config)#no ip 
+R2(config)#no ip do
+R2(config)#no ip domain-lookup
+R2(config)#enable secret class
+R2(config)#banner motd &
+Enter TEXT message.  End with the character '&'.
+*********************************
+   !!!AUTHORIZED ACCESS ONLY!!!
+*********************************
+&
+
+R2(config)#line console 0
+R2(config-line)#password cisco
+R2(config-line)#login exit
+                      ^
+% Invalid input detected at '^' marker.
+	
+R2(config-line)#login
+R2(config-line)#exit
+R2(config)#line vty 0 4
+R2(config-line)#password cisco
+R2(config-line)#login
+R2(config-line)#exit
+R2(config)#int fa0/0
+R2(config-if)#ip address 64.96.32.1 255.255.240.0
+R2(config-if)#no shutdown
+
+R2(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R2(config-if)#int se2/0
+R2(config-if)#ip address 64.96.60.13 255.255.255.252
+R2(config-if)#no shutdown
+
+R2(config-if)#
+%LINK-5-CHANGED: Interface Serial2/0, changed state to up
+
+R2(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial2/0, changed state to up
+
+R2(config-if)#end
+R2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R2#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R2#
+
+
+
+
+R3(config)#ip dhcp exclude
+R3(config)#ip dhcp excluded-address 64.96.48.1
+R3(config)#ip dhcp excluded-address 64.96.48.10 64.96.48.11
+R3(config)#ip dhcp pool R3-LAN
+R3(dhcp-config)#net
+R3(dhcp-config)#network 64.96.48.0 255.255.252.0
+R3(dhcp-config)#de
+R3(dhcp-config)#default-router 64.96.48.1
+R3(dhcp-config)#dn
+R3(dhcp-config)#dns-server 64.96.48.11
+R3(dhcp-config)#
+R3(dhcp-config)#
+R3(dhcp-config)#
+R3(dhcp-config)#web
+R3(dhcp-config)#web-s
+R3(dhcp-config)#end
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R3#
+
+
+
+Press RETURN to get started!
+
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+%LINK-5-CHANGED: Interface Serial2/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial2/0, changed state to up
+
+*************************************
+  !!!AUTHORIZED ACCESS ONLY!!!
+*************************************
+
+
+User Access Verification
+
+Password: 
+
+R6>en
+Password: 
+R6#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R6(config)#ip dhcp 
+R6(config)#ip dhcp e
+R6(config)#ip dhcp excluded-address 64.96.58.1
+R6(config)#ip dh
+R6(config)#ip dhcp p
+R6(config)#ip dhcp pool R6-LAN
+R6(dhcp-config)#network 
+R6(dhcp-config)#network 
+R6(dhcp-config)#network 64.96.58.0 255.255.254.0
+R6(dhcp-config)#default
+R6(dhcp-config)#default-router 64.96.58.1
+R6(dhcp-config)#dns
+R6(dhcp-config)#dns-server 64.96.48.11
+R6(dhcp-config)#no shutdown
+                   ^
+% Invalid input detected at '^' marker.
+	
+R6(dhcp-config)#
+R6(dhcp-config)#end
+R6#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R6#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R6#
+
+
+
+R4>en
+Password: 
+R4#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R4(config)#ip dhcp ex
+R4(config)#ip dhcp excluded-address 64.96.52.1
+R4(config)#ip dhcp pool R4-LAN
+R4(dhcp-config)#network 64.96.52.0
+R4(dhcp-config)#network 64.96.52.0
+% Incomplete command.
+R4(dhcp-config)#
+R4(dhcp-config)#network 64.96.52.0 255.255.252.0
+R4(dhcp-config)#dns
+R4(dhcp-config)#dns-server 64.96.48.11
+R4(dhcp-config)#
+R4(dhcp-config)#end
+R4#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R4#show ip dhcp binding
+IP address       Client-ID/              Lease expiration        Type
+                 Hardware address
+R4#show ip dhcp binding
+IP address       Client-ID/              Lease expiration        Type
+                 Hardware address
+64.96.52.2       0090.0C17.28D3           --                     Automatic
+64.96.52.3       000D.BD74.A858           --                     Automatic
+R4#
+
+
+
+R2>en
+Password: 
+Password: 
+Password: 
+R2#ip dhcp ex
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#ip 
+R2(config)#ip d
+R2(config)#ip dhcp 
+R2(config)#ip dhcp ex
+R2(config)#ip dhcp excluded-address 64.96.32.1 
+R2(config)#ip dhcp excluded-address 64.96.32.10
+R2(config)#ip dhcp pool R2-LAN
+R2(dhcp-config)#network 64.96.32.0 255.255.240.0
+R2(dhcp-config)#default
+R2(dhcp-config)#default-router 64.96.32.1
+R2(dhcp-config)#dns
+R2(dhcp-config)#dns-server 64.96.48.11
+R2(dhcp-config)#end
+R2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R2#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R2#
+
+
+
+
+
+Password: 
+
+R1>en
+Password: 
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#ip dhcp ex
+R1(config)#ip dhcp excluded-address 64.96.0.1
+R1(config)#ip dhcp po
+R1(config)#ip dhcp pool R1-LAN
+R1(dhcp-config)#network 64.96.0.0 255.255.224.0
+R1(dhcp-config)#default-
+R1(dhcp-config)#default-router 64.96.0.1
+R1(dhcp-config)#dns
+R1(dhcp-config)#dns-server 64.96.48.11
+R1(dhcp-config)#end
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R1#
+
+
+R1>en
+Password: 
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int se3/0
+R1(config-if)#ip address 64.96.60.21 255.255.255.252
+R1(config-if)#no shutdown
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface Serial3/0, changed state to up
+
+R1(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial3/0, changed state to up
+
+R1(config-if)#end
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R1#
+
+
+
+User Access Verification
+
+Password: 
+
+R3>en
+Password: 
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#int se8/0
+R3(config-if)#ip address 64.96.60.22 255.255.255.252
+R3(config-if)#clock rate 64000
+R3(config-if)#no shutdown
+R3(config-if)#end
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R3#
+
+
+
+
+
+R3>en
+Password: 
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#ip route 64.96.56.0 255.255.254.0 se7/0
+R3(config)#ip route 64.96.60.16255.255.254.0 se7/0^Z
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#ip route 64.96.60.16 255.255.255.252 se7/0
+R3(config)#ip route 64.96.0.0 255.255.224.0 se7/0
+R3(config)#ip route 64.96.0.0 255.255.224.0 se8/0 5
+R3(config)#show ip route
+            ^
+% Invalid input detected at '^' marker.
+	
+R3(config)#end
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     64.0.0.0/8 is variably subnetted, 9 subnets, 4 masks
+S       64.96.0.0/19 is directly connected, Serial7/0
+C       64.96.48.0/22 is directly connected, FastEthernet0/0
+S       64.96.56.0/23 is directly connected, Serial7/0
+C       64.96.60.0/30 is directly connected, Serial3/0
+C       64.96.60.4/30 is directly connected, Serial6/0
+C       64.96.60.8/30 is directly connected, Serial7/0
+C       64.96.60.12/30 is directly connected, Serial2/0
+S       64.96.60.16/30 is directly connected, Serial7/0
+C       64.96.60.20/30 is directly connected, Serial8/0
+
+R3#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R3#
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#ip route 64.96.58.0 255.255.254.0 se3/0
+R3(config)#
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+
+R6>en
+Password: 
+R6#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R6(config)#ip route 64.96.48.0 255.255.252.0 se2/0
+R6(config)#
+
+
+
+R6>en
+Password: 
+R6#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     64.0.0.0/8 is variably subnetted, 3 subnets, 3 masks
+S       64.96.48.0/22 is directly connected, Serial2/0
+C       64.96.58.0/23 is directly connected, FastEthernet0/0
+C       64.96.60.0/30 is directly connected, Serial2/0
+
+R6#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R6(config)#router rip
+R6(config-router)#version 2
+R6(config-router)#no auto-summary
+R6(config-router)#do show ip route connected
+ C   64.96.58.0/23  is directly connected, FastEthernet0/0
+ C   64.96.60.0/30  is directly connected, Serial2/0
+
+R6(config-router)#network 64.96.58.0
+R6(config-router)#network 64.96.60.0
+R6(config-router)#passive
+R6(config-router)#passive-interface fa0/0
+R6(config-router)#end
+R6#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R6#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R6#
+
+
+
+
+R3>en
+Password: 
+R3#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     64.0.0.0/8 is variably subnetted, 10 subnets, 4 masks
+S       64.96.0.0/19 is directly connected, Serial7/0
+C       64.96.48.0/22 is directly connected, FastEthernet0/0
+S       64.96.56.0/23 is directly connected, Serial7/0
+S       64.96.58.0/23 is directly connected, Serial3/0
+C       64.96.60.0/30 is directly connected, Serial3/0
+C       64.96.60.4/30 is directly connected, Serial6/0
+C       64.96.60.8/30 is directly connected, Serial7/0
+C       64.96.60.12/30 is directly connected, Serial2/0
+S       64.96.60.16/30 is directly connected, Serial7/0
+C       64.96.60.20/30 is directly connected, Serial8/0
+
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#router rip
+R3(config-router)#version 2
+R3(config-router)#no auto
+R3(config-router)#no auto-summary 
+R3(config-router)#do show
+R3(config-router)#do show 
+R3(config-router)#do show ip
+R3(config-router)#do show ip co
+R3(config-router)#do show ip connected
+show ip connected
+         ^
+% Invalid input detected at '^' marker.
+	
+R3(config-router)#do show ip route connected
+ C   64.96.48.0/22  is directly connected, FastEthernet0/0
+ C   64.96.60.0/30  is directly connected, Serial3/0
+ C   64.96.60.4/30  is directly connected, Serial6/0
+ C   64.96.60.8/30  is directly connected, Serial7/0
+ C   64.96.60.12/30  is directly connected, Serial2/0
+ C   64.96.60.20/30  is directly connected, Serial8/0
+
+R3(config-router)#network ?
+  A.B.C.D  Network number
+R3(config-router)#network 64.96.48.0
+R3(config-router)#network 64.96.60.0
+R3(config-router)#network 64.96.60.4
+R3(config-router)#network 64.96.60.8
+R3(config-router)#network 64.96.60.12
+R3(config-router)#network 64.96.60.20
+R3(config-router)#passive
+R3(config-router)#passive-interface fa0/0
+R3(config-router)#end
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R3#
+
+
+
+
+User Access Verification
+
+Password: 
+
+R2>en
+Password: 
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#router rip
+R2(config-router)#version 2
+R2(config-router)#no au
+R2(config-router)#no auto-summary 
+R2(config-router)#do show ip route connecetd
+Translating "connecetd"...domain server (255.255.255.255)
+% Invalid input detected
+
+R2(config-router)#do show ip route connected
+ C   64.96.32.0/20  is directly connected, FastEthernet0/0
+ C   64.96.60.12/30  is directly connected, Serial2/0
+
+R2(config-router)#network 64.96.32.0
+R2(config-router)#network 64.96.60.12
+R2(config-router)#passive
+R2(config-router)#passive-interface fa0/0
+R2(config-router)#end
+R2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R2#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R2#
+
+
+
+
+R4>en
+Password: 
+R4#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R4(config)#router rip
+R4(config-router)#version 2
+R4(config-router)#no 
+R4(config-router)#no au
+R4(config-router)#no auto-summary 
+R4(config-router)#do show ip route 
+R4(config-router)#do show ip route connected
+ C   64.96.52.0/22  is directly connected, FastEthernet0/0
+ C   64.96.60.4/30  is directly connected, Serial2/0
+
+R4(config-router)#network 64.96.52.0
+R4(config-router)#network 64.96.60.4
+R4(config-router)#passive
+R4(config-router)#passive-interface fa0/0
+R4(config-router)#end
+R4#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R4#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R4#
+
+
+
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#router rip
+R5(config-router)#version 2
+R5(config-router)#no au
+R5(config-router)#no auto-summary 
+R5(config-router)#do show ip route connecetd
+Translating "connecetd"...domain server (255.255.255.255)
+% Invalid input detected
+
+R5(config-router)#do show ip route connected
+ C   64.96.56.0/23  is directly connected, FastEthernet0/0
+ C   64.96.60.8/30  is directly connected, Serial2/0
+ C   64.96.60.16/30  is directly connected, Serial3/0
+
+R5(config-router)#network 64.96.56.0
+R5(config-router)#network 64.96.60.8
+R5(config-router)#network 64.96.60.16
+R5(config-router)#pass
+R5(config-router)#passive-interface fa0/0
+R5(config-router)#end
+R5#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R5#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R5#
+
+
+
+
+
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#roter rip
+             ^
+% Invalid input detected at '^' marker.
+	
+R1(config)#router rip
+R1(config-router)#version 2
+R1(config-router)#no au
+R1(config-router)#no auto-summary 
+R1(config-router)#do show ip route connected
+ C   64.96.0.0/19  is directly connected, FastEthernet0/0
+ C   64.96.60.16/30  is directly connected, Serial2/0
+ C   64.96.60.20/30  is directly connected, Serial3/0
+
+R1(config-router)#network 64.96.0.0
+R1(config-router)#network 64.96.60.16
+R1(config-router)#network 64.96.60.20
+R1(config-router)#pas
+R1(config-router)#passive-interface fa0/0
+R1(config-router)#end
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R1#
+
+
+
+R4#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R4(config)#ip dhcp ex
+R4(config)#ip dhcp excluded-address 64.96.52.1
+R4(config)#ip dhcp pool R4-LAN
+R4(dhcp-config)#network 64.96.52.0
+% Incomplete command.
+R4(dhcp-config)#network 64.96.52.0 255.255.252.0
+R4(dhcp-config)#defaul
+R4(dhcp-config)#default-router 64.96.52.1
+R4(dhcp-config)#dns
+R4(dhcp-config)#dns-server 64.96.48.11
+R4(dhcp-config)#end
+R4#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R4#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R4#
+R4#
+
+
+
+
+
+R3>en
+Password: 
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#int s7/0
+R3(config-if)#shutdown
+
+R3(config-if)#
+%LINK-5-CHANGED: Interface Serial7/0, changed state to administratively down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial7/0, changed state to down
+
+R3(config-if)#exit
+R3(config)#exit
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     64.0.0.0/8 is variably subnetted, 9 subnets, 5 masks
+S       64.96.0.0/19 is directly connected, Serial8/0
+R       64.96.32.0/20 [120/1] via 64.96.60.13, 00:00:04, Serial2/0
+C       64.96.48.0/22 is directly connected, FastEthernet0/0
+R       64.96.52.0/22 [120/1] via 64.96.60.5, 00:00:16, Serial6/0
+S       64.96.58.0/23 is directly connected, Serial3/0
+C       64.96.60.0/30 is directly connected, Serial3/0
+C       64.96.60.4/30 is directly connected, Serial6/0
+C       64.96.60.12/30 is directly connected, Serial2/0
+C       64.96.60.20/30 is directly connected, Serial8/0
+
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#ip route 64.96.60.16 255.255.255.252 se8/0 5
+R3(config)#ip route 64.96.56.0 255.255.254.0 se8/0 5
+R3(config)#end
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R3#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     64.0.0.0/8 is variably subnetted, 11 subnets, 5 masks
+S       64.96.0.0/19 is directly connected, Serial8/0
+R       64.96.32.0/20 [120/1] via 64.96.60.13, 00:00:04, Serial2/0
+C       64.96.48.0/22 is directly connected, FastEthernet0/0
+R       64.96.52.0/22 [120/1] via 64.96.60.5, 00:00:16, Serial6/0
+S       64.96.56.0/23 is directly connected, Serial8/0
+S       64.96.58.0/23 is directly connected, Serial3/0
+C       64.96.60.0/30 is directly connected, Serial3/0
+C       64.96.60.4/30 is directly connected, Serial6/0
+C       64.96.60.12/30 is directly connected, Serial2/0
+S       64.96.60.16/30 is directly connected, Serial8/0
+C       64.96.60.20/30 is directly connected, Serial8/0
+
+R3#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     64.0.0.0/8 is variably subnetted, 11 subnets, 5 masks
+S       64.96.0.0/19 is directly connected, Serial8/0
+R       64.96.32.0/20 [120/1] via 64.96.60.13, 00:00:17, Serial2/0
+C       64.96.48.0/22 is directly connected, FastEthernet0/0
+R       64.96.52.0/22 [120/1] via 64.96.60.5, 00:00:29, Serial6/0
+S       64.96.56.0/23 is directly connected, Serial8/0
+S       64.96.58.0/23 is directly connected, Serial3/0
+C       64.96.60.0/30 is directly connected, Serial3/0
+C       64.96.60.4/30 is directly connected, Serial6/0
+C       64.96.60.12/30 is directly connected, Serial2/0
+S       64.96.60.16/30 is directly connected, Serial8/0
+C       64.96.60.20/30 is directly connected, Serial8/0
+
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#int se7/0
+R3(config-if)#no shutdow
+
+R3(config-if)#
+%LINK-5-CHANGED: Interface Serial7/0, changed state to up
+
+R3(config-if)#end
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial7/0, changed state to up
+
+R3#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     64.0.0.0/8 is variably subnetted, 12 subnets, 5 masks
+S       64.96.0.0/19 is directly connected, Serial7/0
+R       64.96.32.0/20 [120/1] via 64.96.60.13, 00:00:15, Serial2/0
+C       64.96.48.0/22 is directly connected, FastEthernet0/0
+R       64.96.52.0/22 [120/1] via 64.96.60.5, 00:00:26, Serial6/0
+S       64.96.56.0/23 is directly connected, Serial7/0
+S       64.96.58.0/23 is directly connected, Serial3/0
+C       64.96.60.0/30 is directly connected, Serial3/0
+C       64.96.60.4/30 is directly connected, Serial6/0
+C       64.96.60.8/30 is directly connected, Serial7/0
+C       64.96.60.12/30 is directly connected, Serial2/0
+S       64.96.60.16/30 is directly connected, Serial7/0
+C       64.96.60.20/30 is directly connected, Serial8/0
+
+R3#
+
